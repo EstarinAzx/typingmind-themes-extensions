@@ -2,6 +2,16 @@
 
 This extension enhances the Typing Mind interface when using Deepseek models by displaying the model's reasoning process alongside its responses.
 
+
+
+https://github.com/user-attachments/assets/8be6530b-b751-4117-8f59-bac3fcbce412
+
+
+
+
+
+
+
 ## Installation
 
 Add this URL to your TypingMind extensions:
@@ -57,5 +67,3 @@ Here's how to write a Python script...
 - Only works with Deepseek models
 - Requires Typing Mind's extension feature
 - Works with both streaming and non-streaming responses
-
-https://github.com/user-attachments/assets/4da22922-da0c-4709-bdf4-fba10a078988
