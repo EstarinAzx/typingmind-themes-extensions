@@ -16,7 +16,7 @@ The Deepseek models provide two types of content in their responses:
 2. `content`: The final response
 
 By default, Typing Mind only shows the final response (`content`). This extension modifies the display to show:
-- "🤔 Thinking..." when the model starts reasoning
+- "💭 Thinking..." when the model starts reasoning
 - The reasoning process in quote blocks (>)
 - "💡 Thought for X seconds" when reasoning is complete
 - A separator line (---)
@@ -31,7 +31,7 @@ Here's how to write a Python script...
 
 You'll see:
 ```
-🤔 Thinking...
+💭 Thinking...
 > First, let me understand what the user needs. They want help with Python scripting.
 > I should provide clear steps and examples to guide them.
 > Let me break this down into manageable parts.

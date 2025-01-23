@@ -112,7 +112,7 @@
                             ...data,
                             choices: [{
                               ...data.choices[0],
-                              delta: { content: '🤔 Thinking...\n\n> ' }
+                              delta: { content: '💭 Thinking...\n\n> ' }
                             }]
                           };
                           controller.enqueue(
