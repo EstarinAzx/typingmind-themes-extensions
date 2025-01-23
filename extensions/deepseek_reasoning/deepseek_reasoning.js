@@ -22,7 +22,7 @@
           }
           
           // Check if this is a title generation request
-          const isTitleRequest = body.messages?.[body.messages.length - 1]?.content?.includes('What would be a short and relevant title for this chat?');
+          const isTitleRequest = body.messages?.[body.messages.length - 1]?.content?.startsWith('What would be a short and relevant title for this chat?');
           if (isTitleRequest) {
             return originalFetch.apply(this, args);
           }
