@@ -4,8 +4,15 @@
         background: '#F9F9F9',
         text: '#000',
         border: '#ccc',
-        input: { background: '#f4f4f4', text: 'rgb(13, 13, 13)', placeholder: 'rgb(142, 142, 142)' },
-        button: { primary: 'rgb(13, 13, 13)', hover: 'rgba(13, 13, 13, 0.8)' }
+        input: {
+          background: '#f4f4f4',
+          text: 'rgb(13, 13, 13)',
+          placeholder: 'rgb(142, 142, 142)'
+        },
+        button: {
+          primary: 'rgb(13, 13, 13)',
+          hover: 'rgba(13, 13, 13, 0.8)'
+        }
       },
       fonts: {
         primary:
@@ -124,7 +131,8 @@
       `;
       document.head.appendChild(sidebarStyle);
       new MutationObserver(() => {
-        if (!document.getElementById('typingmindSidebarFixMerged')) document.head.appendChild(sidebarStyle);
+        if (!document.getElementById('typingmindSidebarFixMerged'))
+          document.head.appendChild(sidebarStyle);
       }).observe(document.body, { childList: true, subtree: true });
       const fixSearchPlaceholder = () => {
         const input = document.querySelector('[data-element-id="search-chats-bar"]');
@@ -133,6 +141,7 @@
       document.addEventListener('DOMContentLoaded', fixSearchPlaceholder);
       fixSearchPlaceholder();
       console.log('TypingMind Sidebar Mods loaded.');
+  
     }
   
     /* ---------------- Main Chat & Input Styles ---------------- */
@@ -222,23 +231,27 @@
         -webkit-tap-highlight-color: transparent !important;
       }
       #chat-input-textbox::placeholder { color: ${CONFIG.colors.input.placeholder} !important; opacity: 1 !important; }
-      [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]) {
-        transition: all 0.2s ease !important; color: ${CONFIG.colors.text} !important;
+      /* Exclude send, more-options, and replace-only buttons so their text color is not forced to black */
+      [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]) {
+        transition: all 0.2s ease !important;
+        color: ${CONFIG.colors.text} !important;
       }
-      [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]) svg {
+      [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]) svg {
         width: 20px !important; height: 20px !important; vertical-align: middle !important;
       }
-      [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):hover {
+      [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]):hover {
         background-color: rgba(0,0,0,0.1) !important; border-radius: 0.5rem !important;
       }
       [data-element-id="chat-input-actions"] { padding: 0.5rem 0.75rem !important; }
       [data-element-id="send-button"],
       [data-element-id="more-options-button"] {
-        background-color: ${CONFIG.colors.button.primary} !important; border-color: ${CONFIG.colors.button.primary} !important;
+        background-color: ${CONFIG.colors.button.primary} !important;
+        border-color: ${CONFIG.colors.button.primary} !important;
       }
       [data-element-id="send-button"]:hover,
       [data-element-id="more-options-button"]:hover {
-        background-color: ${CONFIG.colors.button.hover} !important; border-color: ${CONFIG.colors.button.hover} !important;
+        background-color: ${CONFIG.colors.button.hover} !important;
+        border-color: ${CONFIG.colors.button.hover} !important;
       }
     `;
     document.head.appendChild(inputStyle);
@@ -247,12 +260,20 @@
     const multiStepParse = txt =>
       Utils.safe(() => {
         let res = txt;
-        // Triple backticks to <pre><code>
-        res = res.replace(/```\s*([\s\S]*?)\s*```/g, (_, code) =>
-          `<pre style="background:${CONFIG.colors.background};border:1px solid ${CONFIG.colors.border};padding:6px;border-radius:${CONFIG.borderRadius.small};overflow-x:auto;margin:0;"><code style="font-family:${CONFIG.fonts.code};font-size:13px;line-height:20px;white-space:pre;display:block;overflow-wrap:normal;word-break:normal;">${code}</code></pre>`
+        // Replace triple backticks with an optional language specifier into <pre><code> blocks.
+        res = res.replace(/```(\w+)?\s*([\s\S]*?)\s*```/g, (_, lang, code) => {
+          lang = lang ? lang.toLowerCase() : '';
+          return `<pre style="background:${CONFIG.colors.background}; border:1px solid ${CONFIG.colors.border}; padding:6px; border-radius:${CONFIG.borderRadius.small}; overflow-x:auto; margin:0;" class="code-block${lang ? ' language-' + lang : ''}"><code style="font-family:${CONFIG.fonts.code}; font-size:13px; line-height:20px; white-space:pre; display:block; overflow-wrap:normal; word-break:normal;">${code}</code></pre>`;
+        });
+        // Replace inline code (backticks) with <code> tags styled similarly to ChatGPT.
+        res = res.replace(/`([^`]+)`/g, (_, inline) =>
+          `<code style="background-color:#f6f8fa; padding:0.2em 0.4em; border-radius:3px; font-family:${CONFIG.fonts.code}; font-size:90%;">${inline}</code>`
         );
-        res = res.replace(/`([^`]+)`/g, (_, inline) => `<span style="font-weight:bold;">${inline}</span>`);
-        return res.replace(/&#039;([^&#]+)&#039;/g, (_, content) => `<span style="font-weight:bold;">${content}</span>`);
+        // Replace encoded single quotes with inline code styling.
+        res = res.replace(/&#039;([^&#]+)&#039;/g, (_, content) =>
+          `<code style="background-color:#f6f8fa; padding:0.2em 0.4em; border-radius:3px; font-family:${CONFIG.fonts.code}; font-size:90%;">${content}</code>`
+        );
+        return res;
       }, 'multiStepParse');
   
     const processMessageContent = safeTxt =>
@@ -266,7 +287,10 @@
         proc = multiStepParse(proc);
         tests.forEach(({ open, inner, close }, i) => {
           const parsed = multiStepParse(inner);
-          proc = proc.replace(`__TEST_${i}__`, `${open}<span style="font-weight:bold;">${parsed}</span>${close}`);
+          proc = proc.replace(
+            `__TEST_${i}__`,
+            `${open}<code style="background-color:#f6f8fa; padding:0.2em 0.4em; border-radius:3px; font-family:${CONFIG.fonts.code}; font-size:90%;">${parsed}</code>${close}`
+          );
         });
         return proc;
       }, 'processMessageContent');
@@ -279,13 +303,18 @@
         const safeText = Utils.escapeHtml(raw);
         const processed = processMessageContent(safeText);
         const container = msgEl.querySelector('div');
-        container ? (container.innerHTML = processed) : (msgEl.innerHTML = `<div>${processed}</div>`);
+        container
+          ? (container.innerHTML = processed)
+          : (msgEl.innerHTML = `<div>${processed}</div>`);
       }, 'styleUserMessageEl');
   
     const handleJsonCodeBlock = codeEl =>
       Utils.safe(() => {
         const content = codeEl.textContent.trim();
-        if (!(content.startsWith('{') && content.endsWith('}') && content.includes('"code"'))) return;
+        if (
+          !(content.startsWith('{') && content.endsWith('}') && content.includes('"code"'))
+        )
+          return;
         try {
           let json = JSON.parse(content);
           if (typeof json.code !== 'string') return;
@@ -306,14 +335,21 @@
               borderRadius: CONFIG.borderRadius.small
             });
         } catch (e) {
-          console.error('Error parsing JSON code block:', e, content.substring(0, 100) + '...');
+          console.error(
+            'Error parsing JSON code block:',
+            e,
+            content.substring(0, 100) + '...'
+          );
         }
       }, 'handleJsonCodeBlock');
   
     const styleSandboxOutputs = () =>
       document.querySelectorAll(SELECTORS.RESULT_BLOCKS).forEach(preEl => {
         if (preEl.closest('.editing')) return;
-        if (preEl.textContent.includes('SANDBOX_ID') || preEl.textContent.includes('STANDARD_OUTPUT')) {
+        if (
+          preEl.textContent.includes('SANDBOX_ID') ||
+          preEl.textContent.includes('STANDARD_OUTPUT')
+        ) {
           Object.assign(preEl.style, {
             whiteSpace: 'pre-wrap',
             wordWrap: 'break-word',
@@ -350,11 +386,18 @@
           m =>
             m.addedNodes.length ||
             m.type === 'characterData' ||
-            (m.type === 'childList' && m.target.matches && m.target.matches(SELECTORS.USER_MESSAGE_BLOCK))
+            (m.type === 'childList' &&
+              m.target.matches &&
+              m.target.matches(SELECTORS.USER_MESSAGE_BLOCK))
         )
       )
         setTimeout(improveTextDisplay, 0);
-    }).observe(document.body, { childList: true, subtree: true, attributes: true, characterData: true });
+    }).observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      characterData: true
+    });
   
     console.log('typingmind-custom-with-sidebar.js: Loaded.');
   })();
