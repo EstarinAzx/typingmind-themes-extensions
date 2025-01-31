@@ -44,9 +44,7 @@ This theme is provided "as is" without any warranties. Use at your own risk. The
 
 - 🎨 Clean and modern design
 - 💬 Enhanced chat bubbles
-- 🌓 Dark mode support
 - 📱 Responsive design
-- ⚡ Performance optimized
 - 🎯 Improved readability
 
 ## Features in Detail
