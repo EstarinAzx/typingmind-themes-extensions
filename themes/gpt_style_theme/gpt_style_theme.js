@@ -19,8 +19,16 @@
                 'ui-sans-serif, -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif',
             code: 'ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace',
         },
-        spacing: { small: '0.5rem', medium: '1rem', large: '1.5rem' },
-        borderRadius: { small: '0.5rem', medium: '1rem', large: '1.5rem' },
+        spacing: {
+            small: '0.5rem',
+            medium: '1rem',
+            large: '1.5rem',
+        },
+        borderRadius: {
+            small: '0.5rem',
+            medium: '1rem',
+            large: '1.5rem',
+        },
     };
 
     const SELECTORS = {
@@ -56,7 +64,6 @@
                       .replace(/"/g, '&quot;')
                       .replace(/'/g, '&#039;'),
     };
-
     /* ---------------- Sidebar Modifications ---------------- */
     if (!document.getElementById('typingmindSidebarFixMerged')) {
         const sidebarStyle = document.createElement('style');
@@ -144,73 +151,156 @@
         fixSearchPlaceholder();
         console.log('TypingMind Sidebar Mods loaded.');
     }
-
     /* ---------------- Main Chat & Input Styles ---------------- */
     const mainStyle = document.createElement('style');
     mainStyle.textContent = `
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full *:not(
-        pre, pre *, code, code *, .flex.items-start.justify-center.flex-col.gap-2 *,
-        .text-xs.text-gray-500.truncate, .italic.truncate.hover\\:underline, h1, h2, h3, h4, h5, h6,
-        .katex, .katex *, .katex-display, .katex-display *
-      ),
-      [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] > div:not(.katex, .katex *, .katex-display, .katex-display *) {
-        font-family: ${CONFIG.fonts.primary}; font-size: 14px !important; line-height: 28px !important; color: ${CONFIG.colors.text} !important;
-      }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full:not(.katex, .katex *, .katex-display, .katex-display *),
-      [data-element-id="chat-space-middle-part"] [data-element-id="user-message"]:not(.katex, .katex *, .katex-display, .katex-display *) {
-        font-family: ${CONFIG.fonts.primary}; font-size: 14px !important; line-height: 28px !important; color: ${CONFIG.colors.text} !important;
-      }
-      /* Preserve KaTeX fonts and styling */
+      /* First, explicitly preserve TeXZilla and KaTeX elements */
+      [data-element-id="chat-space-middle-part"] math,
+      [data-element-id="chat-space-middle-part"] math *,
       [data-element-id="chat-space-middle-part"] .katex,
       [data-element-id="chat-space-middle-part"] .katex *,
       [data-element-id="chat-space-middle-part"] .katex-display,
-      [data-element-id="chat-space-middle-part"] .katex-display * {
-        font-family: KaTeX_Main, 'Times New Roman', serif !important;
+      [data-element-id="chat-space-middle-part"] .katex-display *,
+      [data-element-id="chat-space-middle-part"] .texzilla-rendered,
+      [data-element-id="chat-space-middle-part"] .texzilla-rendered * {
+        font-family: inherit !important;
+        font-size: inherit !important;
+        line-height: inherit !important;
       }
+
+      /* Then apply custom styles to non-math elements */
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full *:not(
+        pre, pre *, code, code *,
+        .flex.items-start.justify-center.flex-col.gap-2 *,
+        .text-xs.text-gray-500.truncate,
+        .italic.truncate.hover\\:underline,
+        h1, h2, h3, h4, h5, h6,
+        math, math *,
+        .katex, .katex *,
+        .katex-display, .katex-display *,
+        .texzilla-rendered, .texzilla-rendered *
+      ),
+      [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] > div:not(
+        math, math *,
+        .katex, .katex *,
+        .katex-display, .katex-display *,
+        .texzilla-rendered, .texzilla-rendered *
+      ) {
+        font-family: ${CONFIG.fonts.primary};
+        font-size: 14px !important;
+        line-height: 28px !important;
+        color: ${CONFIG.colors.text} !important;
+      }
+
       [data-element-id="chat-space-middle-part"] .text-xs.text-gray-500.truncate,
       [data-element-id="chat-space-middle-part"] .italic.truncate.hover\\:underline,
       [data-element-id="chat-space-middle-part"] .flex.items-start.justify-center.flex-col.gap-2 {
-        font-size: unset !important; line-height: unset !important; font-family: unset !important; color: unset !important;
+        font-size: unset !important;
+        line-height: unset !important;
+        font-family: unset !important;
+        color: unset !important;
       }
+
       [data-element-id="chat-space-middle-part"] [data-element-id="response-block"]:has([data-element-id="user-message"]) [data-element-id="chat-avatar-container"] {
         display: none !important;
       }
+
       [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] {
-        margin-left: auto !important; margin-right: 0 !important; display: block !important; max-width: 70% !important;
-        border-radius: ${CONFIG.borderRadius.large} !important; background-color: ${CONFIG.colors.input.background} !important;
-        color: ${CONFIG.colors.text} !important; padding: ${CONFIG.spacing.small} !important; margin-bottom: ${CONFIG.spacing.small} !important;
+        margin-left: auto !important;
+        margin-right: 0 !important;
+        display: block !important;
+        max-width: 70% !important;
+        border-radius: ${CONFIG.borderRadius.large} !important;
+        background-color: ${CONFIG.colors.input.background} !important;
+        color: ${CONFIG.colors.text} !important;
+        padding: ${CONFIG.spacing.small} !important;
+        margin-bottom: ${CONFIG.spacing.small} !important;
       }
+
       [data-element-id="chat-space-middle-part"] [data-element-id="user-message"],
       [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] > div {
         background-color: ${CONFIG.colors.input.background} !important;
       }
+
       [data-element-id="chat-space-middle-part"] pre:has(div.relative) {
-        background-color: #F9F9F9 !important; border: 1px solid ${CONFIG.colors.border} !important; border-radius: ${CONFIG.borderRadius.small} !important;
+        background-color: #F9F9F9 !important;
+        border: 1px solid ${CONFIG.colors.border} !important;
+        border-radius: ${CONFIG.borderRadius.small} !important;
       }
+
       [data-element-id="chat-space-middle-part"] pre.mb-2.overflow-auto.text-sm.border.border-gray-200.rounded.bg-gray-100 {
-        background-color: #000 !important; color: #fff !important; border: none !important; padding: 8px !important; border-radius: 4px !important;
-        white-space: pre-wrap !important; word-wrap: break-word !important; overflow-x: hidden !important;
+        background-color: #000 !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 8px !important;
+        border-radius: 4px !important;
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+        overflow-x: hidden !important;
       }
+
       [data-element-id="chat-space-middle-part"] pre > div.relative { position: relative !important; }
+      
       [data-element-id="chat-space-middle-part"] pre > div.relative > div.sticky {
-        position: sticky !important; top: 0 !important; z-index: 10 !important; background-color: #F9F9F9 !important;
-        border-radius: 0.5rem 0.5rem 0 0 !important; border-bottom: 1px solid ${CONFIG.colors.border} !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 10 !important;
+        background-color: #F9F9F9 !important;
+        border-radius: 0.5rem 0.5rem 0 0 !important;
+        border-bottom: 1px solid ${CONFIG.colors.border} !important;
       }
+
       [data-element-id="chat-space-middle-part"] pre > div.relative > div > pre {
-        border: none !important; background: transparent !important; margin: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        margin: 0 !important;
       }
-      [data-element-id="chat-space-middle-part"] [data-element-id="response-block"]:hover { background-color: transparent !important; }
+
+      [data-element-id="chat-space-middle-part"] [data-element-id="response-block"]:hover {
+        background-color: transparent !important;
+      }
+
       [data-element-id="chat-space-middle-part"] .prose.max-w-full ul,
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full ol { margin: 0.5rem 0 !important; }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full li { margin: 0.3rem 0 !important; }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full li::marker {
-        color: ${CONFIG.colors.text} !important; font-weight: bold !important;
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full ol {
+        margin: 0.5rem 0 !important;
       }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full ul > li { list-style-type: disc !important; padding-left: 0.5rem !important; }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full ol > li { list-style-type: decimal !important; padding-left: 0.5rem !important; }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full h1 { font-size: 2em !important; line-height: 1.3 !important; margin: 0.5em 0 !important; }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full h2 { font-size: 1.5em !important; line-height: 1.3 !important; margin: 0.5em 0 !important; }
-      [data-element-id="chat-space-middle-part"] .prose.max-w-full h3 { font-size: 1.25em !important; line-height: 1.3 !important; margin: 0.5em 0 !important; }
+
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full li {
+        margin: 0.3rem 0 !important;
+      }
+
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full li::marker {
+        color: ${CONFIG.colors.text} !important;
+        font-weight: bold !important;
+      }
+
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full ul > li {
+        list-style-type: disc !important;
+        padding-left: 0.5rem !important;
+      }
+
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full ol > li {
+        list-style-type: decimal !important;
+        padding-left: 0.5rem !important;
+      }
+
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full h1 {
+        font-size: 2em !important;
+        line-height: 1.3 !important;
+        margin: 0.5em 0 !important;
+      }
+
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full h2 {
+        font-size: 1.5em !important;
+        line-height: 1.3 !important;
+        margin: 0.5em 0 !important;
+      }
+
+      [data-element-id="chat-space-middle-part"] .prose.max-w-full h3 {
+        font-size: 1.25em !important;
+        line-height: 1.3 !important;
+        margin: 0.5em 0 !important;
+      }
     `;
     document.head.appendChild(mainStyle);
 
@@ -221,6 +311,7 @@
         border-radius: ${CONFIG.borderRadius.large};
         margin-bottom: ${CONFIG.spacing.medium};
       }
+
       #chat-input-textbox {
         font-family: ${CONFIG.fonts.primary};
         font-size: 16px !important;
@@ -239,24 +330,38 @@
         font-variant-ligatures: none !important;
         -webkit-tap-highlight-color: transparent !important;
       }
-      #chat-input-textbox::placeholder { color: ${CONFIG.colors.input.placeholder} !important; opacity: 1 !important; }
-      /* Exclude send, more-options, and replace-only buttons so their text color is not forced to black */
+
+      #chat-input-textbox::placeholder {
+        color: ${CONFIG.colors.input.placeholder} !important;
+        opacity: 1 !important;
+      }
+
       [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]) {
         transition: all 0.2s ease !important;
         color: ${CONFIG.colors.text} !important;
       }
+
       [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]) svg {
-        width: 20px !important; height: 20px !important; vertical-align: middle !important;
+        width: 20px !important;
+        height: 20px !important;
+        vertical-align: middle !important;
       }
+
       [data-element-id="chat-input-actions"] button:not([data-element-id="send-button"]):not([data-element-id="more-options-button"]):not([data-element-id="replace-only-button"]):hover {
-        background-color: rgba(0,0,0,0.1) !important; border-radius: 0.5rem !important;
+        background-color: rgba(0,0,0,0.1) !important;
+        border-radius: 0.5rem !important;
       }
-      [data-element-id="chat-input-actions"] { padding: 0.5rem 0.75rem !important; }
+
+      [data-element-id="chat-input-actions"] {
+        padding: 0.5rem 0.75rem !important;
+      }
+
       [data-element-id="send-button"],
       [data-element-id="more-options-button"] {
         background-color: ${CONFIG.colors.button.primary} !important;
         border-color: ${CONFIG.colors.button.primary} !important;
       }
+
       [data-element-id="send-button"]:hover,
       [data-element-id="more-options-button"]:hover {
         background-color: ${CONFIG.colors.button.hover} !important;
@@ -264,19 +369,26 @@
       }
     `;
     document.head.appendChild(inputStyle);
-
     /* ---------------- Text Parsing & Code Block Handling ---------------- */
     const multiStepParse = txt =>
         Utils.safe(() => {
             let res = txt;
 
-            // Store LaTeX expressions temporarily
-            const latexExpressions = [];
-            res = res.replace(/(\$\$[\s\S]*?\$\$|\$[^\$\n]+\$)/g, match => {
-                const placeholder = `__LATEX_${latexExpressions.length}__`;
-                latexExpressions.push(match);
-                return placeholder;
-            });
+            // Store math expressions temporarily
+            const mathExpressions = [];
+            res = res.replace(
+                // Match all LaTeX patterns:
+                // 1. Block math: $$...$$, including multiline
+                // 2. Inline math: $...$, including multiline
+                // 3. LaTeX display math: \[...\], including multiline
+                // 4. LaTeX inline math: \(...\), including multiline
+                /((?:\$\$[\s\S]*?\$\$)|(?:\$[\s\S]*?\$)|(?:\\\[[\s\S]*?\\\])|(?:\\\([\s\S]*?\\\)))/g,
+                match => {
+                    const placeholder = `__MATH_${mathExpressions.length}__`;
+                    mathExpressions.push(match);
+                    return placeholder;
+                }
+            );
 
             // Replace triple backticks with an optional language specifier into <pre><code> blocks.
             res = res.replace(
@@ -311,9 +423,9 @@
                     `<code style="background-color:#f6f8fa; padding:0.2em 0.4em; border-radius:3px; font-family:${CONFIG.fonts.code}; font-size:90%;">${content}</code>`
             );
 
-            // Restore LaTeX expressions
-            latexExpressions.forEach((latex, index) => {
-                res = res.replace(`__LATEX_${index}__`, latex);
+            // Restore math expressions
+            mathExpressions.forEach((math, index) => {
+                res = res.replace(`__MATH_${index}__`, math);
             });
 
             return res;
@@ -415,7 +527,6 @@
                 if (container) container.style.overflowX = 'hidden';
             }
         });
-
     const improveTextDisplay = Utils.debounce(
         () =>
             Utils.safe(() => {
