@@ -11,7 +11,7 @@
      * 2. Deepseek API endpoint to intercept.
      * ------------------------------------------------------
      */
-    const DEEPSEEK_API_URL = 'openrouter.ai/api/v1/chat/completions';
+    const DEEPSEEK_API_URL = 'api.kluster.ai/v1/chat/completions';
 
     /**
      * ------------------------------------------------------
