@@ -105,6 +105,28 @@
                 font-family: "Inter", "Segoe UI", Arial, sans-serif !important;
             }
             
+            /* FIX: Ensure text doesn't turn white on hover */
+            p:hover, div:hover, span:hover, li:hover, a:hover, 
+            h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover,
+            .dark\\:text-white:hover,
+            .dark\\:text-gray-300:hover,
+            .dark\\:text-gray-400:hover,
+            .text-white:hover,
+            .text-gray-300:hover,
+            .text-gray-400:hover,
+            *:hover > span,
+            *:hover > p,
+            *:hover > div:not(.bg-blue-500):not(.bg-blue-600):not([class*="bg-blue-"]):not([role="menuitem"]):not(button):not([role="button"]) {
+                color: ${CONFIG.colors.text.primary} !important;
+            }
+            
+            /* FIX: Force text color for spans inside hovered elements */
+            *:hover span,
+            *:hover div > span,
+            *:hover p > span {
+                color: ${CONFIG.colors.text.primary} !important;
+            }
+            
             /* Headings with slightly brighter text */
             h1, h2, h3, h4, h5, h6,
             .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
@@ -123,24 +145,6 @@
                 color: ${CONFIG.colors.text.secondary} !important;
             }
             
-            /* IMPORTANT: Fix for text hover issue */
-            *:hover {
-                color: ${CONFIG.colors.text.primary} !important;
-            }
-            
-            /* Then override specific hover states we want different */
-            a:hover, .dark a:hover {
-                color: ${CONFIG.colors.text.highlight} !important;
-            }
-            
-            strong:hover, b:hover, .dark strong:hover, .dark b:hover {
-                color: ${CONFIG.colors.text.highlight} !important;
-            }
-            
-            h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
-                color: ${CONFIG.colors.text.highlight} !important;
-            }
-            
             /* Button styling - dark blue with subtle border */
             [data-element-id="new-chat-button-in-side-bar"] { 
                 background-color: ${CONFIG.colors.button.primary} !important; 
@@ -153,6 +157,7 @@
                 color: ${CONFIG.colors.text.primary} !important; 
             }
             
+            /* Button hover color fix */
             [data-element-id="new-chat-button-in-side-bar"]:hover * { 
                 color: ${CONFIG.colors.text.primary} !important; 
             }
@@ -182,9 +187,11 @@
                 border-left: 2px solid ${CONFIG.colors.lightAccent} !important;
             }
             
-            /* Keep text color consistent on hover for chat items */
+            /* Fix text color in hovered chat items */
             [data-element-id="custom-chat-item"]:hover *,
-            [data-element-id="selected-chat-item"]:hover * {
+            [data-element-id="selected-chat-item"]:hover *,
+            .dark\\:hover\\:bg-gray-800:hover *,
+            .dark\\:bg-gray-800:hover * {
                 color: ${CONFIG.colors.text.primary} !important;
             }
             
@@ -236,7 +243,8 @@
                 background-color: ${CONFIG.colors.deepAccent} !important; 
             }
             
-            /* Fix menu item text on hover */
+            /* Fix menu item text color */
+            #headlessui-portal-root [role="menuitem"] *,
             #headlessui-portal-root [role="menuitem"]:hover * {
                 color: ${CONFIG.colors.text.primary} !important;
             }
@@ -338,15 +346,6 @@
                 color: ${CONFIG.colors.text.primary} !important;
             }
             
-            /* Fix message text hover states */
-            [data-element-id="ai-message"] p:hover,
-            [data-element-id="ai-message"] div:hover,
-            [data-element-id="ai-message"] span:hover,
-            [data-element-id="ai-message"] li:hover,
-            [data-element-id="ai-message"]:hover * {
-                color: ${CONFIG.colors.text.primary} !important;
-            }
-            
             /* User message bubbles - dark with subtle border */
             [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] {
                 margin-left: auto !important;
@@ -367,12 +366,10 @@
                 background-color: transparent !important;
             }
             
-            /* Fix for user message hover state */
-            [data-element-id="chat-space-middle-part"] [data-element-id="user-message"]:hover,
+            /* Fix user message hover text color */
             [data-element-id="chat-space-middle-part"] [data-element-id="user-message"]:hover > div,
-            [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] > div:hover,
-            [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] span:hover,
-            [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] p:hover {
+            [data-element-id="chat-space-middle-part"] [data-element-id="user-message"]:hover span,
+            [data-element-id="chat-space-middle-part"] [data-element-id="user-message"]:hover p {
                 color: ${CONFIG.colors.text.highlight} !important;
             }
             
@@ -395,11 +392,13 @@
                 font-size: 0.9em !important;
             }
             
-            /* Fix code text on hover */
-            .dark pre code:hover,
+            /* Fix code hover text color */
+            .dark pre:hover code,
             .dark code:hover,
-            pre code:hover, 
-            code:hover {
+            pre:hover code, 
+            code:hover,
+            .dark pre code:hover,
+            pre code:hover {
                 color: ${CONFIG.colors.code.text} !important;
             }
             
@@ -428,11 +427,6 @@
                 opacity: 1 !important;
             }
             
-            /* Fix input text hover */
-            #chat-input-textbox:hover {
-                color: ${CONFIG.colors.text.primary} !important;
-            }
-            
             /* Button styling */
             .dark .bg-gray-800 button,
             [data-element-id="send-button"],
@@ -450,7 +444,7 @@
                 border-color: ${CONFIG.colors.button.hover} !important;
             }
             
-            /* Fix button text on hover */
+            /* Fix button hover text color */
             .dark .bg-gray-800 button:hover *,
             [data-element-id="send-button"]:hover *,
             [data-element-id="more-options-button"]:hover * {
@@ -468,6 +462,14 @@
                 color: ${CONFIG.colors.text.primary} !important;
                 opacity: 1 !important;
                 background-color: ${CONFIG.colors.deepAccent} !important;
+            }
+            
+            /* Fix hover text color for input buttons */
+            [data-element-id="chat-input-actions"] button:hover svg *,
+            [data-element-id="chat-input-actions"] button:hover span {
+                color: ${CONFIG.colors.text.primary} !important;
+                fill: ${CONFIG.colors.text.primary} !important;
+                stroke: ${CONFIG.colors.text.primary} !important;
             }
             
             /* Bottom action buttons */
@@ -500,13 +502,11 @@
                 box-shadow: 0 2px 8px ${CONFIG.colors.glow} !important;
             }
             
-            /* Fix button text on hover */
+            /* Fix hover text color for buttons */
             .fixed.bottom-4.right-4 button:hover *,
             .fixed.bottom-0.right-0 button:hover *,
             .bg-blue-500:hover *,
             .bg-blue-600:hover *,
-            .bg-blue-700:hover *,
-            [class*="bg-blue-"]:hover *,
             button[class*="bg-blue-"]:hover *,
             a[class*="bg-blue-"]:hover * {
                 color: ${CONFIG.colors.text.primary} !important;
@@ -614,6 +614,11 @@
                 color: ${CONFIG.colors.text.highlight} !important;
             }
             
+            /* Fix link hover text */
+            a:hover *, .dark a:hover * {
+                color: ${CONFIG.colors.text.highlight} !important;
+            }
+            
             /* Tables with subtle borders */
             table, th, td {
                 border-color: ${CONFIG.colors.border} !important;
@@ -625,11 +630,25 @@
                 color: ${CONFIG.colors.text.highlight} !important;
             }
             
+            /* Fix table hover text */
+            table:hover td, table:hover th, 
+            tr:hover td, tr:hover th,
+            td:hover, th:hover,
+            table:hover *, tr:hover *, td:hover *, th:hover * {
+                color: ${CONFIG.colors.text.primary} !important;
+            }
+            
             /* Blockquotes */
             blockquote, .dark blockquote {
                 border-left: 3px solid ${CONFIG.colors.lightAccent} !important;
                 background-color: ${CONFIG.colors.panels} !important;
                 padding: 0.5rem 1rem !important;
+                color: ${CONFIG.colors.text.secondary} !important;
+            }
+            
+            /* Fix blockquote hover text */
+            blockquote:hover, blockquote:hover *,
+            .dark blockquote:hover, .dark blockquote:hover * {
                 color: ${CONFIG.colors.text.secondary} !important;
             }
             
@@ -647,6 +666,13 @@
                 font-weight: 500 !important;
             }
             
+            /* Fix strong/bold hover text */
+            strong:hover, b:hover, 
+            .dark strong:hover, .dark b:hover,
+            *:hover strong, *:hover b {
+                color: ${CONFIG.colors.text.highlight} !important;
+            }
+            
             /* Lists */
             ul, ol {
                 color: ${CONFIG.colors.text.primary} !important;
@@ -656,6 +682,12 @@
                 color: ${CONFIG.colors.lightAccent} !important;
             }
             
+            /* Fix list hover text */
+            ul:hover, ol:hover, li:hover,
+            ul:hover *, ol:hover *, li:hover * {
+                color: ${CONFIG.colors.text.primary} !important;
+            }
+            
             /* AI message text color adjustment */
             [data-element-id="ai-message"] p,
             [data-element-id="ai-message"] div,
@@ -663,23 +695,48 @@
                 color: ${CONFIG.colors.text.primary} !important;
             }
             
-            /* Additional fix for any hover-related color changes */
-            [data-element-id="chat-space-middle-part"] p:hover,
-            [data-element-id="chat-space-middle-part"] div:hover,
-            [data-element-id="chat-space-middle-part"] span:hover,
-            [data-element-id="chat-space-middle-part"] li:hover {
+            /* Fix AI message hover text */
+            [data-element-id="ai-message"] p:hover,
+            [data-element-id="ai-message"] div:hover,
+            [data-element-id="ai-message"] span:hover,
+            [data-element-id="ai-message"]:hover p,
+            [data-element-id="ai-message"]:hover div,
+            [data-element-id="ai-message"]:hover span {
                 color: ${CONFIG.colors.text.primary} !important;
-            }
-            
-            /* Fix for hover states on list markers */
-            li:hover::marker {
-                color: ${CONFIG.colors.lightAccent} !important; 
             }
             
             /* Text selection color */
             ::selection {
                 background-color: ${CONFIG.colors.lightAccent} !important;
                 color: ${CONFIG.colors.background} !important;
+            }
+            
+            /* Force all other elements to maintain text color on hover */
+            *:hover {
+                color: inherit !important;
+            }
+            
+            /* Additional text color overrides for specific hover cases */
+            [class*="hover\\:text-white"]:hover,
+            [class*="hover\\:text-gray"]:hover,
+            [class*="hover\\:text-black"]:hover,
+            [class*="dark\\:hover\\:text"]:hover {
+                color: ${CONFIG.colors.text.primary} !important;
+            }
+            
+            /* Force specific text elements to maintain color */
+            .prose :where(p):not(:where([class~="not-prose"],[class~="not-prose"] *)):hover {
+                color: ${CONFIG.colors.text.primary} !important;
+            }
+            
+            /* Keep the right text color for the AI messages */
+            [data-element-id="ai-message"] * {
+                color: ${CONFIG.colors.text.primary} !important;
+            }
+            
+            /* Special case for code-related hovering */
+            code *, code:hover, code:hover * {
+                color: ${CONFIG.colors.code.text} !important;
             }
         `;
         document.head.appendChild(mainStyle);
@@ -756,15 +813,6 @@
             container
                 ? (container.innerHTML = processed)
                 : (msgEl.innerHTML = `<div>${processed}</div>`);
-            
-            // Add special fix for hover events on code elements
-            const codeElements = msgEl.querySelectorAll('code');
-            codeElements.forEach(code => {
-                code.setAttribute('data-hover-fixed', 'true');
-                code.addEventListener('mouseover', function() {
-                    this.style.color = CONFIG.colors.code.text;
-                });
-            });
         }, 'styleUserMessageEl');
 
     const handleJsonCodeBlock = codeEl =>
@@ -790,13 +838,6 @@
                     wordWrap: 'break-word',
                     color: CONFIG.colors.code.text,
                 });
-                
-                // Add hover event to maintain text color
-                codeEl.setAttribute('data-hover-fixed', 'true');
-                codeEl.addEventListener('mouseover', function() {
-                    this.style.color = CONFIG.colors.code.text;
-                });
-                
                 const pre = codeEl.closest('pre');
                 if (pre)
                     Object.assign(pre.style, {
@@ -833,13 +874,6 @@
                     borderRadius: '4px',
                     boxShadow: `0 2px 6px ${CONFIG.colors.shadow}`,
                 });
-                
-                // Add hover event to maintain text color
-                preEl.setAttribute('data-hover-fixed', 'true');
-                preEl.addEventListener('mouseover', function() {
-                    this.style.color = CONFIG.colors.code.text;
-                });
-                
                 const container = preEl.closest('.pb-6');
                 if (container) container.style.overflowX = 'hidden';
             }
@@ -900,21 +934,32 @@
                     chatInput.style.color = CONFIG.colors.text.primary;
                 }
                 
-                // Fix for any elements whose color might be changed on hover
-                document.querySelectorAll('p, span, div, li, a, button').forEach(el => {
-                    if (!el.hasAttribute('data-hover-fixed')) {
-                        el.setAttribute('data-hover-fixed', 'true');
-                        el.addEventListener('mouseover', function() {
-                            if (this.tagName.toLowerCase() === 'a') {
-                                this.style.color = CONFIG.colors.text.highlight;
-                            } else if (this.tagName.toLowerCase() === 'button') {
-                                this.style.color = CONFIG.colors.text.primary;
+                // Force hover text fixes for all elements (added dynamically)
+                document.querySelectorAll('p, div, span, li, h1, h2, h3, h4, h5, h6, a').forEach(el => {
+                    if (!el.getAttribute('data-hover-fixed')) {
+                        el.addEventListener('mouseenter', function() {
+                            if (this.style.color) {
+                                this.setAttribute('data-original-color', this.style.color);
+                            }
+                            if (this.classList.contains('code') || this.closest('code') || this.closest('pre')) {
+                                this.style.color = CONFIG.colors.code.text;
+                            } else if (this.nodeName === 'A' || this.closest('a')) {
+                                this.style.color = CONFIG.colors.lightAccent;
                             } else if (this.closest('[data-element-id="user-message"]')) {
                                 this.style.color = CONFIG.colors.text.highlight;
                             } else {
                                 this.style.color = CONFIG.colors.text.primary;
                             }
                         });
+                        
+                        el.addEventListener('mouseleave', function() {
+                            const originalColor = this.getAttribute('data-original-color');
+                            if (originalColor) {
+                                this.style.color = originalColor;
+                            }
+                        });
+                        
+                        el.setAttribute('data-hover-fixed', 'true');
                     }
                 });
             }, 'improveTextDisplay'),
@@ -941,5 +986,27 @@
         characterData: true,
     });
 
-    console.log('Underwave/Darkwave theme applied with fix for hover text issues');
+    // Extra fix for hover colors - add a global event listener
+    document.addEventListener('mouseover', function(e) {
+        const target = e.target;
+        if (target.nodeType === 1 && !target.classList.contains('bg-blue-500') && !target.classList.contains('bg-blue-600') && target.tagName !== 'BUTTON' && !target.hasAttribute('role')) {
+            // Fix the text color for non-button elements on hover
+            const allTextElements = target.querySelectorAll('p, span, div:not([class*="bg-blue"]):not([role="menuitem"]), h1, h2, h3, h4, h5, h6');
+            allTextElements.forEach(el => {
+                if (el.closest('code') || el.closest('pre')) {
+                    el.style.color = CONFIG.colors.code.text;
+                } else if (el.closest('a')) {
+                    el.style.color = CONFIG.colors.lightAccent;
+                } else if (el.closest('[data-element-id="user-message"]')) {
+                    el.style.color = CONFIG.colors.text.highlight;
+                } else if (el.tagName === 'STRONG' || el.tagName === 'B') {
+                    el.style.color = CONFIG.colors.text.highlight;
+                } else {
+                    el.style.color = CONFIG.colors.text.primary;
+                }
+            });
+        }
+    }, true);
+
+    console.log('Underwave/Darkwave theme applied with fix for hover text colors');
 })();
