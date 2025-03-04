@@ -2,20 +2,20 @@
     const CONFIG = {
         colors: {
             background: '#050510',    // Ultra-dark blue-black background
-            text: '#8A8AA0',          // Muted blue-gray text
+            text: '#CBCBE2',          // Changed to #CBCBE2 - lighter blue-lavender text
             border: '#1A1A3A',        // Dark blue borders
             input: {
                 background: '#0A0A20', // Slightly lighter dark blue input background
-                text: '#8A8AA0',       // Muted blue-gray text
-                placeholder: '#3A3A8C', // Medium blue for placeholder
+                text: '#CBCBE2',       // Changed to #CBCBE2
+                placeholder: '#8A8ACA', // Medium blue for placeholder (adjusted to match new text)
             },
             button: {
                 primary: '#1A1A3A',    // Dark blue for buttons
                 hover: '#2A2A5A',      // Slightly lighter blue on hover
             },
             accent: {
-                primary: '#3A3A8C',    // Medium blue accent
-                secondary: '#4A4A9C',  // Medium-light blue accent
+                primary: '#8A8ACA',    // Medium blue accent (adjusted to complement new text)
+                secondary: '#9A9ADA',  // Medium-light blue accent (adjusted)
                 tertiary: '#1A1A2E',   // Dark blue accent
             },
             panels: '#0A0A20',         // Slightly lighter dark blue for panels
@@ -68,8 +68,8 @@
             [data-element-id="side-bar-background"],
             [data-element-id="sidebar-beginning-part"],
             [data-element-id="sidebar-middle-part"] { background-color: ${CONFIG.colors.background} !important; }
-            [data-element-id="new-chat-button-in-side-bar"] { background-color: ${CONFIG.colors.button.primary} !important; color: #8A8AA0 !important; }
-            [data-element-id="new-chat-button-in-side-bar"] * { color: #8A8AA0 !important; }
+            [data-element-id="new-chat-button-in-side-bar"] { background-color: ${CONFIG.colors.button.primary} !important; color: ${CONFIG.colors.text} !important; }
+            [data-element-id="new-chat-button-in-side-bar"] * { color: ${CONFIG.colors.text} !important; }
             [data-element-id="search-chats-bar"] { background-color: ${CONFIG.colors.input.background} !important; color: ${CONFIG.colors.text} !important; border: 1px solid ${CONFIG.colors.border} !important; }
             [data-element-id="search-chats-bar"][placeholder]::placeholder,
             [data-element-id="search-chats-bar"]::-webkit-input-placeholder,
@@ -260,7 +260,7 @@
         
         [data-element-id="chat-space-middle-part"] pre.mb-2.overflow-auto.text-sm.border.border-gray-200.rounded.bg-gray-100 {
             background-color: #080818 !important;
-            color: #4A4A9C !important;
+            color: ${CONFIG.colors.accent.secondary} !important;
             border: 1px solid ${CONFIG.colors.border} !important;
             padding: 8px !important;
             border-radius: 4px !important;
@@ -285,7 +285,7 @@
             border: none !important;
             background: transparent !important;
             margin: 0 !important;
-            color: #4A4A9C !important;
+            color: ${CONFIG.colors.accent.secondary} !important;
         }
         
         [data-element-id="chat-space-middle-part"] [data-element-id="response-block"]:hover { background-color: transparent !important; }
@@ -313,7 +313,7 @@
         
         /* Code elements */
         [data-element-id="chat-space-middle-part"] code {
-            color: #4A4A9C !important;
+            color: ${CONFIG.colors.accent.secondary} !important;
             background-color: #080818 !important;
         }
         
@@ -344,9 +344,9 @@
         
         /* Subtle code block glow - much more subdued than vaporwave */
         @keyframes subtleGlow {
-            0% { text-shadow: 0 0 2px #3A3A8C; }
-            50% { text-shadow: 0 0 4px #4A4A9C; }
-            100% { text-shadow: 0 0 2px #3A3A8C; }
+            0% { text-shadow: 0 0 2px #8A8ACA; }
+            50% { text-shadow: 0 0 4px #9A9ADA; }
+            100% { text-shadow: 0 0 2px #8A8ACA; }
         }
         
         [data-element-id="chat-space-middle-part"] pre code {
@@ -434,7 +434,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, #1A1A3A, #3A3A8C, #1A1A3A);
+            background: linear-gradient(90deg, #1A1A3A, #8A8ACA, #1A1A3A);
             z-index: 100;
         }
         
@@ -540,18 +540,18 @@
                         CONFIG.borderRadius.small
                     }; overflow-x:auto; margin:0;" class="code-block${
                         lang ? ' language-' + lang : ''
-                    }"><code style="white-space:pre; display:block; overflow-wrap:normal; word-break:normal; color:#4A4A9C;">${code}</code></pre>`;
+                    }"><code style="white-space:pre; display:block; overflow-wrap:normal; word-break:normal; color:${CONFIG.colors.accent.secondary};">${code}</code></pre>`;
                 }
             );
             res = res.replace(
                 /`([^`]+)`/g,
                 (_, inline) =>
-                    `<code style="background-color:#080818; color:#4A4A9C; padding:0.2em 0.4em; border-radius:3px;">${inline}</code>`
+                    `<code style="background-color:#080818; color:${CONFIG.colors.accent.secondary}; padding:0.2em 0.4em; border-radius:3px;">${inline}</code>`
             );
             res = res.replace(
                 /&#039;([^&#]+)&#039;/g,
                 (_, content) =>
-                    `<code style="background-color:#080818; color:#4A4A9C; padding:0.2em 0.4em; border-radius:3px;">${content}</code>`
+                    `<code style="background-color:#080818; color:${CONFIG.colors.accent.secondary}; padding:0.2em 0.4em; border-radius:3px;">${content}</code>`
             );
             return res;
         }, 'multiStepParse');
@@ -572,7 +572,7 @@
                 const parsed = multiStepParse(inner);
                 proc = proc.replace(
                     `__TEST_${i}__`,
-                    `${open}<code style="background-color:#080818; color:#4A4A9C; padding:0.2em 0.4em; border-radius:3px;">${parsed}</code>${close}`
+                    `${open}<code style="background-color:#080818; color:${CONFIG.colors.accent.secondary}; padding:0.2em 0.4em; border-radius:3px;">${parsed}</code>${close}`
                 );
             });
             return proc;
@@ -612,7 +612,7 @@
                 Object.assign(codeEl.style, {
                     whiteSpace: 'pre-wrap',
                     wordWrap: 'break-word',
-                    color: '#4A4A9C',
+                    color: CONFIG.colors.accent.secondary,
                 });
                 const pre = codeEl.closest('pre');
                 if (pre)
@@ -645,7 +645,7 @@
                     wordWrap: 'break-word',
                     overflowX: 'hidden',
                     background: '#080818',
-                    color: '#4A4A9C',
+                    color: CONFIG.colors.accent.secondary,
                     padding: '8px',
                     borderRadius: '4px',
                     boxShadow: '0 0 10px rgba(26,26,58,0.2)',
@@ -861,5 +861,5 @@
         characterData: true,
     });
 
-    console.log('Underwave theme applied with deep blue-black, dark blue, and muted blue color scheme');
+    console.log('Underwave theme applied with ultra-dark background and #CBCBE2 text color');
 })();
