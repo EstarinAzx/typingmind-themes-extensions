@@ -5,12 +5,12 @@
             text: '#333333',          // Dark gray text for readability
             border: '#E0E0E0',        // Very light gray border
             input: {
-                background: '#FFFFFF', // Pure white input background
+                background: '#FAF9F5', // Pure white input background
                 text: '#333333',       // Dark gray text
                 placeholder: '#999999', // Medium gray for placeholder
             },
             button: {
-                primary: '#F5F5DC',    // Soft beige for buttons
+                primary: '#F0EEE6',    // 
                 hover: '#EDE4E0',      // Slightly darker beige on hover
             },
             accent: {
