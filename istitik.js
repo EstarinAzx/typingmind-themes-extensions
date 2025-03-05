@@ -5,9 +5,9 @@
             text: '#333333',          // Dark gray text for readability
             border: '#E0E0E0',        // Very light gray border
             input: {
-                background: '#FFFFFF', // White input background
+                background: '#FFFFFF', // Pure white input background
                 text: '#333333',       // Dark gray text
-                placeholder: '#999999', // Light gray for placeholder
+                placeholder: '#999999', // Medium gray for placeholder
             },
             button: {
                 primary: '#F5F5DC',    // Soft beige for buttons
@@ -18,7 +18,7 @@
                 secondary: '#999999',  // Light gray
                 tertiary: '#E0E0E0',   // Very light gray
             },
-            panels: '#FFFFFF',         // White for panels
+            panels: '#FFFFFF',         // Pure white for panels
         },
         spacing: { small: '0.5rem', medium: '1rem', large: '1.5rem' },
         borderRadius: { small: '0.5rem', medium: '1rem', large: '1.5rem' },
@@ -51,11 +51,11 @@
             typeof str !== 'string'
                 ? ''
                 : str
-                      .replace(/&/g, '&amp;')
-                      .replace(/</g, '&lt;')
-                      .replace(/>/g, '&gt;')
-                      .replace(/"/g, '&quot;')
-                      .replace(/'/g, '&#039;'),
+                      .replace(/&/g, '&')
+                      .replace(/</g, '<')
+                      .replace(/>/g, '>')
+                      .replace(/"/g, '"')
+                      .replace(/'/g, '''),
     };
 
     /* ---------------- Sidebar Modifications ---------------- */
@@ -82,6 +82,7 @@
             .dark .prose pre,
             .bg-gray-50.dark\\:bg-gray-800 { 
                 background-color: ${CONFIG.colors.background} !important;
+                background-image: none !important; /* Remove any patterns */
             }
             
             /* Force text to dark gray */
@@ -96,23 +97,25 @@
                 color: ${CONFIG.colors.text} !important;
             }
             
-            /* Button styling */
+            /* Button styling - subtle and minimal */
             [data-element-id="new-chat-button-in-side-bar"] { 
                 background-color: ${CONFIG.colors.button.primary} !important; 
                 color: ${CONFIG.colors.text} !important;
                 border: 1px solid ${CONFIG.colors.border} !important;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+                transition: all 0.2s ease !important;
             }
             
             [data-element-id="new-chat-button-in-side-bar"] * { 
                 color: ${CONFIG.colors.text} !important; 
             }
             
-            /* Search bar styling */
+            /* Search bar styling - clean and minimal */
             [data-element-id="search-chats-bar"] { 
                 background-color: ${CONFIG.colors.input.background} !important; 
                 color: ${CONFIG.colors.text} !important; 
                 border: 1px solid ${CONFIG.colors.border} !important; 
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             [data-element-id="search-chats-bar"][placeholder]::placeholder,
@@ -123,12 +126,13 @@
                 opacity: 1 !important; 
             }
             
-            /* Selected/hover chat items */
+            /* Selected/hover chat items - subtle highlight */
             [data-element-id="custom-chat-item"]:hover,
             [data-element-id="selected-chat-item"],
             .dark\\:hover\\:bg-gray-800:hover,
             .dark\\:bg-gray-800 { 
                 background-color: ${CONFIG.colors.panels} !important; 
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
             }
             
             /* Light up chat actions on hover */
@@ -150,9 +154,10 @@
             [data-element-id="custom-chat-item"] button[aria-expanded="true"],
             [data-element-id="selected-chat-item"] button[aria-expanded="true"] { 
                 display: inline-block !important; 
+                color: ${CONFIG.colors.accent.primary} !important;
             }
             
-            /* Menus */
+            /* Menus - minimal and clean */
             #headlessui-portal-root { 
                 display: block !important; 
                 visibility: visible !important; 
@@ -166,25 +171,29 @@
                 color: ${CONFIG.colors.text} !important; 
                 pointer-events: auto !important; 
                 border: 1px solid ${CONFIG.colors.border} !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             #headlessui-portal-root [role="menuitem"] { 
                 display: flex !important; 
                 visibility: visible !important; 
                 pointer-events: auto !important; 
+                color: ${CONFIG.colors.text} !important;
             }
             
-            /* Tag panel */
+            /* Tag panel - clean and neutral */
             [data-element-id="tag-search-panel"] { 
                 background-color: ${CONFIG.colors.background} !important; 
                 border: 1px solid ${CONFIG.colors.border} !important; 
                 color: ${CONFIG.colors.text} !important; 
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             [data-element-id="tag-search-panel"] input[type="search"] { 
                 background-color: ${CONFIG.colors.input.background} !important; 
                 border: 1px solid ${CONFIG.colors.border} !important; 
                 color: ${CONFIG.colors.text} !important; 
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             [data-element-id="tag-search-panel"] input[type="checkbox"] { 
@@ -222,7 +231,7 @@
                 color: ${CONFIG.colors.text} !important; 
             }
             
-            /* Scrollbars */
+            /* Scrollbars - subtle and minimal */
             * {
                 scrollbar-width: thin;
                 scrollbar-color: ${CONFIG.colors.accent.tertiary} ${CONFIG.colors.panels};
@@ -269,7 +278,7 @@
                 scrollbar-color: ${CONFIG.colors.accent.tertiary} ${CONFIG.colors.panels} !important; 
             }
             
-            /* Textareas */
+            /* Textareas - clean and minimal */
             [data-element-id="chat-folder"] textarea,
             [data-element-id="custom-chat-item"] textarea,
             [data-element-id="selected-chat-item"] textarea,
@@ -277,6 +286,7 @@
                 background-color: ${CONFIG.colors.input.background} !important; 
                 color: ${CONFIG.colors.text} !important; 
                 border: 1px solid ${CONFIG.colors.border} !important; 
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             [data-element-id="chat-folder"] textarea:focus,
@@ -289,7 +299,7 @@
                 box-shadow: 0 0 0 2px rgba(0,0,0,0.1) !important; 
             }
             
-            /* Button hover effects */
+            /* Button hover effects - subtle */
             [data-element-id="workspace-bar"] button span.hover\\:bg-white\\/20:hover,
             [data-element-id="workspace-bar"] button:hover span.text-white\\/70,
             [data-element-id="workspace-profile-button"]:hover { 
@@ -304,12 +314,13 @@
                 fill: ${CONFIG.colors.text} !important;
             }
             
-            /* Folder icons and sidebar elements */
+            /* Folder icons and sidebar elements - clean */
             [data-element-id="chat-folder"],
             [data-element-id="folder-header"],
             [data-element-id="folder-children"] {
                 background-color: ${CONFIG.colors.background} !important;
                 color: ${CONFIG.colors.text} !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             /* Chat item titles and text */
@@ -320,7 +331,7 @@
                 color: ${CONFIG.colors.text} !important;
             }
             
-            /* User message bubbles with soft beige background */
+            /* User message bubbles - soft beige, minimal */
             [data-element-id="chat-space-middle-part"] [data-element-id="user-message"] {
                 margin-left: auto !important;
                 margin-right: 0 !important;
@@ -332,16 +343,16 @@
                 padding: ${CONFIG.spacing.small} !important;
                 margin-bottom: ${CONFIG.spacing.small} !important;
                 border: 1px solid ${CONFIG.colors.border} !important;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
-            /* Fix light mode code blocks */
+            /* Fix light mode code blocks - minimal styling */
             .dark pre,
             .dark .bg-gray-50,
             .dark [class*="bg-gray-"] {
-                background-color: #FFFFFF !important;
+                background-color: ${CONFIG.colors.panels} !important;
                 border: 1px solid ${CONFIG.colors.border} !important;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             .dark pre code,
@@ -349,29 +360,32 @@
                 color: ${CONFIG.colors.text} !important;
             }
             
-            /* Input area fixes */
+            /* Input area fixes - clean and minimal */
             .dark .bg-gray-800,
             .bg-gray-800,
             .dark\\:bg-gray-800,
             [data-element-id="chat-space-end-part"] [role="presentation"] {
                 background-color: ${CONFIG.colors.panels} !important;
                 border: 1px solid ${CONFIG.colors.border} !important;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
-            /* Input box styling */
+            /* Input box styling - minimal */
             #chat-input-textbox {
                 background-color: ${CONFIG.colors.input.background} !important;
                 color: ${CONFIG.colors.text} !important;
+                border: 1px solid ${CONFIG.colors.border} !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
-            /* Button styling */
+            /* Button styling - neutral and subtle */
             .dark .bg-gray-800 button,
             [data-element-id="send-button"],
             [data-element-id="more-options-button"] {
                 background-color: ${CONFIG.colors.button.primary} !important;
                 border-color: ${CONFIG.colors.button.primary} !important;
                 color: ${CONFIG.colors.text} !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
             .dark .bg-gray-800 button:hover,
@@ -379,9 +393,10 @@
             [data-element-id="more-options-button"]:hover {
                 background-color: ${CONFIG.colors.button.hover} !important;
                 border-color: ${CONFIG.colors.button.hover} !important;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
             }
             
-            /* Bottom action buttons in neutral colors */
+            /* Bottom action buttons - neutral and minimal */
             .fixed.bottom-4.right-4 button,
             .fixed.bottom-0.right-0 button,
             .bg-blue-500,
@@ -393,11 +408,11 @@
                 background-color: ${CONFIG.colors.button.primary} !important;
                 color: ${CONFIG.colors.text} !important;
                 border: 1px solid ${CONFIG.colors.border} !important;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-                transition: all 0.3s ease !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+                transition: all 0.2s ease !important;
             }
             
-            /* Hover effect for buttons */
+            /* Hover effect for buttons - subtle */
             .fixed.bottom-4.right-4 button:hover,
             .fixed.bottom-0.right-0 button:hover,
             .bg-blue-500:hover,
@@ -407,7 +422,7 @@
             button[class*="bg-blue-"]:hover,
             a[class*="bg-blue-"]:hover {
                 background-color: ${CONFIG.colors.button.hover} !important;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15) !important;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
             }
             
             /* Make sure SVG icons in these buttons match */
@@ -421,24 +436,26 @@
                 stroke: ${CONFIG.colors.text} !important;
             }
             
-            /* Make profile picture icon stylish */
+            /* Make profile picture icon stylish - minimal */
             .rounded-full,
             .rounded-full.bg-blue-500,
             .rounded-full.bg-blue-600,
             [data-element-id="workspace-profile-button"] div {
                 background: linear-gradient(45deg, ${CONFIG.colors.button.primary}, ${CONFIG.colors.button.hover}) !important;
                 border: 1px solid ${CONFIG.colors.border} !important;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
-            /* Remove vaporwave effects for minimal look */
+            /* Remove all vaporwave effects for minimal look */
             pre code, code {
                 font-family: monospace !important;
                 animation: none !important;
                 text-shadow: none !important;
+                background-color: ${CONFIG.colors.panels} !important;
+                color: ${CONFIG.colors.text} !important;
             }
             
-            /* Remove vaporwave grid and scan lines */
+            /* Ensure no vaporwave-specific effects remain */
             [data-element-id="chat-space-middle-part"]::before,
             [data-element-id="chat-space-middle-part"]::after,
             [data-element-id="chat-space-beginning-part"]::after,
@@ -446,36 +463,38 @@
                 content: none !important;
             }
             
-            /* Input control panel adjustments */
+            /* Input control panel adjustments - minimal */
             [data-element-id="chat-input-actions"] button, 
             .dark .bg-gray-800 button {
                 color: ${CONFIG.colors.text} !important;
+                background-color: ${CONFIG.colors.button.primary} !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
-            /* Input bar at bottom */
+            /* Input bar at bottom - clean and minimal */
             [data-element-id="chat-space-end-part"] [role="presentation"] {
                 background-color: ${CONFIG.colors.panels} !important;
-                border-radius: 10px !important;
+                border-radius: ${CONFIG.borderRadius.medium} !important;
                 border: 1px solid ${CONFIG.colors.border} !important;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
             }
             
-            /* Fix light mode headings */
+            /* Fix light mode headings - consistent */
             .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
                 color: ${CONFIG.colors.text} !important;
             }
             
-            /* Fix light mode links */
+            /* Fix light mode links - subtle */
             .dark a {
                 color: ${CONFIG.colors.accent.secondary} !important;
             }
             
-            /* Fix menu items on light */
+            /* Fix menu items on light - consistent */
             .dark [role="menuitem"] {
                 color: ${CONFIG.colors.text} !important;
             }
             
-            /* Light mode strong text */
+            /* Light mode strong text - slight emphasis */
             .dark strong, .dark b {
                 color: ${CONFIG.colors.accent.primary} !important;
             }
@@ -486,7 +505,7 @@
                 document.head.appendChild(sidebarStyle);
         }).observe(document.body, { childList: true, subtree: true });
         
-        console.log('Minimal Light Mode Theme loaded.');
+        console.log('Minimal Light Mode Theme loaded with refined neutral aesthetics.');
     }
 
     /* ---------------- Text Parsing & Code Block Handling ---------------- */
@@ -497,7 +516,7 @@
                 /```(\w+)?\s*([\s\S]*?)\s*```/g,
                 (_, lang, code) => {
                     lang = lang ? lang.toLowerCase() : '';
-                    return `<pre style="background:#FFFFFF; border:1px solid ${
+                    return `<pre style="background:${CONFIG.colors.panels}; border:1px solid ${
                         CONFIG.colors.border
                     }; padding:6px; border-radius:${
                         CONFIG.borderRadius.small
@@ -509,12 +528,12 @@
             res = res.replace(
                 /`([^`]+)`/g,
                 (_, inline) =>
-                    `<code style="background-color:#FFFFFF; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${inline}</code>`
+                    `<code style="background-color:${CONFIG.colors.panels}; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${inline}</code>`
             );
             res = res.replace(
                 /'([^&#]+)'/g,
                 (_, content) =>
-                    `<code style="background-color:#FFFFFF; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${content}</code>`
+                    `<code style="background-color:${CONFIG.colors.panels}; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${content}</code>`
             );
             return res;
         }, 'multiStepParse');
@@ -535,7 +554,7 @@
                 const parsed = multiStepParse(inner);
                 proc = proc.replace(
                     `__TEST_${i}__`,
-                    `${open}<code style="background-color:#FFFFFF; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${parsed}</code>${close}`
+                    `${open}<code style="background-color:${CONFIG.colors.panels}; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${parsed}</code>${close}`
                 );
             });
             return proc;
@@ -582,10 +601,10 @@
                     Object.assign(pre.style, {
                         whiteSpace: 'pre-wrap',
                         wordWrap: 'break-word',
-                        backgroundColor: '#FFFFFF',
+                        backgroundColor: `${CONFIG.colors.panels}`,
                         border: `1px solid ${CONFIG.colors.border}`,
                         borderRadius: CONFIG.borderRadius.small,
-                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
                     });
             } catch (e) {
                 console.error(
@@ -607,11 +626,11 @@
                     whiteSpace: 'pre-wrap',
                     wordWrap: 'break-word',
                     overflowX: 'hidden',
-                    background: '#FFFFFF',
+                    background: `${CONFIG.colors.panels}`,
                     color: `${CONFIG.colors.text}`,
                     padding: '8px',
                     borderRadius: '4px',
-                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
                 });
                 const container = preEl.closest('.pb-6');
                 if (container) container.style.overflowX = 'hidden';
@@ -644,15 +663,15 @@
                     el.style.backgroundColor = CONFIG.colors.button.primary;
                     el.style.color = CONFIG.colors.text;
                     el.style.border = `1px solid ${CONFIG.colors.border}`;
-                    el.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                    el.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
                 });
                 
-                // Apply styles to the profile icon
+                // Apply styles to the profile icon - minimal
                 document.querySelectorAll('.rounded-full').forEach(el => {
                     if (el.classList.contains('bg-blue-500') || el.classList.contains('bg-blue-600')) {
                         el.style.background = 'linear-gradient(45deg, ' + CONFIG.colors.button.primary + ', ' + CONFIG.colors.button.hover + ')';
                         el.style.border = '1px solid ' + CONFIG.colors.border;
-                        el.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                        el.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
                     }
                 });
                 
@@ -661,14 +680,16 @@
                 if (inputPanel) {
                     inputPanel.style.backgroundColor = CONFIG.colors.panels;
                     inputPanel.style.border = `1px solid ${CONFIG.colors.border}`;
-                    inputPanel.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                    inputPanel.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
                 }
                 
-                // Fix the chat input box
+                // Fix the chat input box - minimal
                 const chatInput = document.getElementById('chat-input-textbox');
                 if (chatInput) {
                     chatInput.style.backgroundColor = CONFIG.colors.input.background;
                     chatInput.style.color = CONFIG.colors.text;
+                    chatInput.style.border = `1px solid ${CONFIG.colors.border}`;
+                    chatInput.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
                 }
             }, 'improveTextDisplay'),
         100
@@ -694,5 +715,5 @@
         characterData: true,
     });
 
-    console.log('Minimal Light Mode theme applied with neutral aesthetics');
+    console.log('Minimal Light Mode theme applied with refined neutral aesthetics.');
 })();
