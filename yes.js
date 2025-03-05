@@ -1,11 +1,11 @@
 (function () {
     const CONFIG = {
         colors: {
-            background: '#FAF9F5',    // Light off-white background
+            background: '#F5F5F5',    // Light off-white background
             text: '#333333',          // Dark gray text for readability
             border: '#E0E0E0',        // Very light gray border
             input: {
-                background: '#FAF9F5', // Pure white input background
+                background: '#E3DACC', // Pure white input background
                 text: '#333333',       // Dark gray text
                 placeholder: '#999999', // Medium gray for placeholder
             },
