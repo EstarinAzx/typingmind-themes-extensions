@@ -1,7 +1,7 @@
 (function () {
     const CONFIG = {
         colors: {
-            background: '#F5F5F5',    // Light off-white background
+            background: '#FAF9F5',    // Light off-white background
             text: '#333333',          // Dark gray text for readability
             border: '#E0E0E0',        // Very light gray border
             input: {
@@ -11,7 +11,7 @@
             },
             button: {
                 primary: '#F0EEE6',    // 
-                hover: '#EDE4E0',      // Slightly darker beige on hover
+                hover: '#F0EEE6',      // Slightly darker beige on hover
             },
             accent: {
                 primary: '#666666',    // Medium gray for accents
