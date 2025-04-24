@@ -61,14 +61,14 @@
             [data-element-id="workspace-bar"],
             [data-element-id="side-bar-background"],
             [data-element-id="sidebar-beginning-part"],
-            [data-element-id="sidebar-middle-part"] { background-color: #F9F9F9 !important; }
-            [data-element-id="new-chat-button-in-side-bar"] { background-color: #E3E3E3 !important; color: #000 !important; }
-            [data-element-id="new-chat-button-in-side-bar"] * { color: #000 !important; }
-            [data-element-id="search-chats-bar"] { background-color: #fff !important; color: #000 !important; border: 1px solid #ccc !important; }
+            [data-element-id="sidebar-middle-part"] { background-color: ${CONFIG.colors.background} !important; }
+            [data-element-id="new-chat-button-in-side-bar"] { background-color: #3A3149 !important; color: ${CONFIG.colors.text} !important; }
+            [data-element-id="new-chat-button-in-side-bar"] * { color: ${CONFIG.colors.text} !important; }
+            [data-element-id="search-chats-bar"] { background-color: ${CONFIG.colors.input.background} !important; color: ${CONFIG.colors.text} !important; border: 1px solid ${CONFIG.colors.border} !important; }
             [data-element-id="search-chats-bar"][placeholder]::placeholder,
             [data-element-id="search-chats-bar"]::-webkit-input-placeholder,
             [data-element-id="search-chats-bar"]::-moz-placeholder,
-            [data-element-id="search-chats-bar"]:-ms-input-placeholder { color: rgba(0,0,0,0.6) !important; opacity:1 !important; -webkit-text-fill-color: rgba(0,0,0,0.6) !important; }
+            [data-element-id="search-chats-bar"]:-ms-input-placeholder { color: ${CONFIG.colors.input.placeholder} !important; opacity:1 !important; -webkit-text-fill-color: ${CONFIG.colors.input.placeholder} !important; }
             [data-element-id="workspace-bar"] *:not(svg):not(path)[class*="text-white"],
             [data-element-id="workspace-bar"] *:not(svg):not(path)[class*="text-white/"],
             [data-element-id="workspace-bar"] *:not(svg):not(path)[class*="text-gray-"],
@@ -77,9 +77,9 @@
             [data-element-id="side-bar-background"] *:not(svg):not(path)[class*="text-white/"],
             [data-element-id="side-bar-background"] *:not(svg):not(path)[class*="text-gray-"],
             [data-element-id="side-bar-background"] *:not(svg):not(path)[class*="dark:text-white"]
-            { color: #000 !important; opacity:1 !important; --tw-text-opacity:1 !important; }
+            { color: ${CONFIG.colors.text} !important; opacity:1 !important; --tw-text-opacity:1 !important; }
             [data-element-id="custom-chat-item"]:hover,
-            [data-element-id="selected-chat-item"] { background-color: #E3E3E3 !important; }
+            [data-element-id="selected-chat-item"] { background-color: #3A3149 !important; }
             [data-element-id="custom-chat-item"] button[aria-label="Delete Chat"],
             [data-element-id="custom-chat-item"] button[aria-label="Favorite Chat"],
             [data-element-id="custom-chat-item"] button[aria-label="Chat settings"],
@@ -95,33 +95,33 @@
             [data-element-id="custom-chat-item"] button[aria-expanded="true"],
             [data-element-id="selected-chat-item"] button[aria-expanded="true"] { display: inline-block !important; }
             #headlessui-portal-root { display: block !important; visibility: visible !important; pointer-events: auto !important; }
-            #headlessui-portal-root [role="menu"] { display: block !important; visibility: visible !important; background-color: white !important; color: black !important; pointer-events: auto !important; }
+            #headlessui-portal-root [role="menu"] { display: block !important; visibility: visible !important; background-color: ${CONFIG.colors.input.background} !important; color: ${CONFIG.colors.text} !important; pointer-events: auto !important; }
             #headlessui-portal-root [role="menuitem"] { display: flex !important; visibility: visible !important; pointer-events: auto !important; }
-            [data-element-id="tag-search-panel"] { background-color: #F9F9F9 !important; border: 1px solid #ccc !important; color: #000 !important; }
-            [data-element-id="tag-search-panel"] input[type="search"] { background-color: #fff !important; border: 1px solid #ccc !important; color: #000 !important; }
-            [data-element-id="tag-search-panel"] input[type="checkbox"] { appearance: none !important; width: 16px !important; height: 16px !important; border: 1px solid #ccc !important; border-radius: 3px !important; background-color: #fff !important; position: relative !important; cursor: pointer !important; }
-            [data-element-id="tag-search-panel"] input[type="checkbox"]:checked { background-color: #2563eb !important; border-color: #2563eb !important; }
-            [data-element-id="tag-search-panel"] input[type="checkbox"]:checked::after { content: '' !important; position: absolute !important; left: 5px !important; top: 2px !important; width: 4px !important; height: 8px !important; border: solid white !important; border-width: 0 2px 2px 0 !important; transform: rotate(45deg) !important; }
+            [data-element-id="tag-search-panel"] { background-color: ${CONFIG.colors.background} !important; border: 1px solid ${CONFIG.colors.border} !important; color: ${CONFIG.colors.text} !important; }
+            [data-element-id="tag-search-panel"] input[type="search"] { background-color: ${CONFIG.colors.input.background} !important; border: 1px solid ${CONFIG.colors.border} !important; color: ${CONFIG.colors.text} !important; }
+            [data-element-id="tag-search-panel"] input[type="checkbox"] { appearance: none !important; width: 16px !important; height: 16px !important; border: 1px solid ${CONFIG.colors.border} !important; border-radius: 3px !important; background-color: ${CONFIG.colors.input.background} !important; position: relative !important; cursor: pointer !important; }
+            [data-element-id="tag-search-panel"] input[type="checkbox"]:checked { background-color: #584975 !important; border-color: #584975 !important; }
+            [data-element-id="tag-search-panel"] input[type="checkbox"]:checked::after { content: '' !important; position: absolute !important; left: 5px !important; top: 2px !important; width: 4px !important; height: 8px !important; border: solid ${CONFIG.colors.text} !important; border-width: 0 2px 2px 0 !important; transform: rotate(45deg) !important; }
             [data-element-id="tag-search-panel"] label,
             [data-element-id="tag-search-panel"] p,
             [data-element-id="tag-search-panel"] span,
-            [data-element-id="tag-search-panel"] button { color: #000 !important; }
+            [data-element-id="tag-search-panel"] button { color: ${CONFIG.colors.text} !important; }
             [data-element-id="tag-search-panel"] .overflow-auto::-webkit-scrollbar { width: 8px !important; }
-            [data-element-id="tag-search-panel"] .overflow-auto::-webkit-scrollbar-track { background: #f1f1f1 !important; border-radius: 4px !important; }
-            [data-element-id="tag-search-panel"] .overflow-auto::-webkit-scrollbar-thumb { background: #c1c1c1 !important; border-radius: 4px !important; }
-            [data-element-id="tag-search-panel"] .overflow-auto::-webkit-scrollbar-thumb:hover { background: #a1a1a1 !important; }
-            [data-element-id="tag-search-panel"] .overflow-auto { scrollbar-width: thin !important; scrollbar-color: #c1c1c1 #f1f1f1 !important; }
+            [data-element-id="tag-search-panel"] .overflow-auto::-webkit-scrollbar-track { background: ${CONFIG.colors.input.background} !important; border-radius: 4px !important; }
+            [data-element-id="tag-search-panel"] .overflow-auto::-webkit-scrollbar-thumb { background: #505050 !important; border-radius: 4px !important; }
+            [data-element-id="tag-search-panel"] .overflow-auto::-webkit-scrollbar-thumb:hover { background: #707070 !important; }
+            [data-element-id="tag-search-panel"] .overflow-auto { scrollbar-width: thin !important; scrollbar-color: #505050 ${CONFIG.colors.input.background} !important; }
             [data-element-id="chat-folder"] textarea,
             [data-element-id="custom-chat-item"] textarea,
             [data-element-id="selected-chat-item"] textarea,
-            [data-element-id="side-bar-background"] textarea { background-color: #fff !important; color: #000 !important; border: 1px solid #ccc !important; }
+            [data-element-id="side-bar-background"] textarea { background-color: ${CONFIG.colors.input.background} !important; color: ${CONFIG.colors.text} !important; border: 1px solid ${CONFIG.colors.border} !important; }
             [data-element-id="chat-folder"] textarea:focus,
             [data-element-id="custom-chat-item"] textarea:focus,
             [data-element-id="selected-chat-item"] textarea:focus,
-            [data-element-id="side-bar-background"] textarea:focus { background-color: #fff !important; color: #000 !important; border-color: #2563eb !important; box-shadow: 0 0 0 2px rgba(37,99,235,0.2) !important; }
+            [data-element-id="side-bar-background"] textarea:focus { background-color: ${CONFIG.colors.input.background} !important; color: ${CONFIG.colors.text} !important; border-color: #584975 !important; box-shadow: 0 0 0 2px rgba(88, 73, 117, 0.3) !important; }
             [data-element-id="workspace-bar"] button span.hover\\:bg-white\\/20:hover,
             [data-element-id="workspace-bar"] button:hover span.text-white\\/70,
-            [data-element-id="workspace-profile-button"]:hover { background-color: rgba(0,0,0,0.1) !important; }
+            [data-element-id="workspace-profile-button"]:hover { background-color: rgba(255,255,255,0.08) !important; }
         `;
         document.head.appendChild(sidebarStyle);
         new MutationObserver(() => {
@@ -143,6 +143,9 @@
     /* ---------------- Main Chat & Input Styles ---------------- */
     const mainStyle = document.createElement('style');
     mainStyle.textContent = `
+        [data-element-id="chat-space-middle-part"] {
+            background-color: ${CONFIG.colors.background} !important;
+        }
         [data-element-id="chat-space-middle-part"] .prose.max-w-full *:not(
             pre, pre *, code, code *, .flex.items-start.justify-center.flex-col.gap-2 *,
             .text-xs.text-gray-500.truncate, .italic.truncate.hover\\:underline, h1, h2, h3, h4, h5, h6
@@ -173,13 +176,13 @@
             background-color: ${CONFIG.colors.input.background} !important;
         }
         [data-element-id="chat-space-middle-part"] pre:has(div.relative) {
-            background-color: #F9F9F9 !important;
+            background-color: ${CONFIG.colors.background} !important;
             border: 1px solid ${CONFIG.colors.border} !important;
             border-radius: ${CONFIG.borderRadius.small} !important;
         }
         [data-element-id="chat-space-middle-part"] pre.mb-2.overflow-auto.text-sm.border.border-gray-200.rounded.bg-gray-100 {
-            background-color: #000 !important;
-            color: #fff !important;
+            background-color: #111 !important;
+            color: #eee !important;
             border: none !important;
             padding: 8px !important;
             border-radius: 4px !important;
@@ -192,7 +195,7 @@
             position: sticky !important;
             top: 0 !important;
             z-index: 10 !important;
-            background-color: #F9F9F9 !important;
+            background-color: ${CONFIG.colors.background} !important;
             border-radius: 0.5rem 0.5rem 0 0 !important;
             border-bottom: 1px solid ${CONFIG.colors.border} !important;
         }
@@ -292,12 +295,12 @@
             res = res.replace(
                 /`([^`]+)`/g,
                 (_, inline) =>
-                    `<code style="background-color:#f6f8fa; padding:0.2em 0.4em; border-radius:3px;">${inline}</code>`
+                    `<code style="background-color:${CONFIG.colors.input.background}; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${inline}</code>`
             );
             res = res.replace(
                 /&#039;([^&#]+)&#039;/g,
                 (_, content) =>
-                    `<code style="background-color:#f6f8fa; padding:0.2em 0.4em; border-radius:3px;">${content}</code>`
+                    `<code style="background-color:${CONFIG.colors.input.background}; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${content}</code>`
             );
             return res;
         }, 'multiStepParse');
@@ -318,7 +321,7 @@
                 const parsed = multiStepParse(inner);
                 proc = proc.replace(
                     `__TEST_${i}__`,
-                    `${open}<code style="background-color:#f6f8fa; padding:0.2em 0.4em; border-radius:3px;">${parsed}</code>${close}`
+                    `${open}<code style="background-color:${CONFIG.colors.input.background}; color:${CONFIG.colors.text}; padding:0.2em 0.4em; border-radius:3px;">${parsed}</code>${close}`
                 );
             });
             return proc;
